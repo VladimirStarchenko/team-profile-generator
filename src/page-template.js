@@ -64,3 +64,38 @@ function htmlContent(data) {
   }
   return cards;
 }
+
+module.exports = (members) => {
+  return `
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+    src="https://kit.fontawesome.com/4cf7e7bf8a.js"
+    crossorigin="anonymous"
+  ></script>
+  </head>
+  <body>
+    <div class="row justify-content-center h-100">
+      <div class="col-12 bg-danger text-light">
+        <h3 class="text-center">My Team</h3>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap">
+    <div class="card-deck">
+        ${htmlContent(members)}
+        </div>
+      </div>
+</body>
+</html>`;
+};
