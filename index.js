@@ -5,6 +5,8 @@ const Intern = require("./lib/Intern");
 const fs = require("fs");
 const template = require("./src/page-template");
 
+const employeeDb = [];
+
 const employeeCards = () => {
   return inquirer.prompt([
     {
@@ -126,3 +128,66 @@ const questions = [
     choices: ["Engineer", "Intern", "Finish building my team"],
   },
 ];
+
+function confirmMembers(managerAnswer) {
+  return inquirer.prompt(confirmation).then((answers) => {
+    const manager = new Manager(
+      managerAnswer.managerName,
+      managerAnswer.managerID,
+      managerAnswer.managerEmail,
+      managerAnswer.managerNumber
+    );
+    employeeDb.push(manager);
+    if (answers.add_more) {
+      return addMembers();
+    } else {
+      return answers;
+    }
+  });
+}
+
+function addMembers() {
+  return inquirer.prompt(questions).then((answers) => {
+    if (answers.addMember === "Engineer") {
+      addEngineer();
+    } else if (answers.addMember === "Intern") {
+      addIntern();
+    } else {
+      console.log(employeeDb);
+      fs.writeFileSync("./dist/index.html", template(employeeDb));
+      return console.log("Your team has been built!");
+    }
+  });
+}
+
+function addEngineer() {
+  inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
+    const engineer = new Engineer(
+      engineerAnswers.engName,
+      engineerAnswers.engId,
+      engineerAnswers.engEmail,
+      engineerAnswers.engGithub
+    );
+    employeeDb.push(engineer);
+    addMembers();
+  });
+}
+
+function addIntern() {
+  inquirer.prompt(internQuestions).then((internAnswers) => {
+    const intern = new Intern(
+      internAnswers.intName,
+      internAnswers.intId,
+      internAnswers.intEmail,
+      internAnswers.intSchool
+    );
+    employeeDb.push(intern);
+    addMembers();
+  });
+}
+
+employeeCards()
+  .then(confirmMembers)
+  .catch((err) => {
+    console.log(err);
+  });
