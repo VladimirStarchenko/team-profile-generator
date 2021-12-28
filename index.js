@@ -63,3 +63,66 @@ const employeeCards = () => {
     },
   ]);
 };
+
+const confirmation = [
+  {
+    type: "confirm",
+    name: "add_more",
+    message: "Would you like to add more members?",
+  },
+];
+
+const engineerQuestions = [
+  {
+    type: "input",
+    name: "engName",
+    message: "Whats your Engineers name?",
+  },
+  {
+    type: "input",
+    name: "engId",
+    message: "Whats your Engineers ID?",
+  },
+  {
+    type: "input",
+    name: "engEmail",
+    message: "Whats your Engineers email?",
+  },
+  {
+    type: "input",
+    name: "engGithub",
+    message: "Whats your Engineers github username?",
+  },
+];
+
+const internQuestions = [
+  {
+    type: "input",
+    name: "intName",
+    message: "Whats your Interns name?",
+  },
+  {
+    type: "input",
+    name: "intId",
+    message: "Whats your Interns ID?",
+  },
+  {
+    type: "input",
+    name: "intEmail",
+    message: "Whats your Interns email?",
+  },
+  {
+    type: "input",
+    name: "intSchool",
+    message: "Whats your Interns school?",
+  },
+];
+
+const questions = [
+  {
+    type: "list",
+    name: "addMember",
+    message: "What team member would you like to add?",
+    choices: ["Engineer", "Intern", "Finish building my team"],
+  },
+];
